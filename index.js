@@ -18,9 +18,10 @@ app.post("/askgpt", async (req, res) => {
         {
           role: "user",
           parts: [
-            { text: behavior || "You are a helpful assistant." },
-            { text: message || "Hello!" }
-          ]
+  {
+    text: `${behavior || "You are a helpful assistant."}\n\n${message || "Hello!"}`
+  }
+]
         }
       ]
     };
