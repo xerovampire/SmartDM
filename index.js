@@ -11,30 +11,37 @@ app.use(express.json());
 app.post("/askgpt", async (req, res) => {
   try {
     const { message, behavior } = req.body;
-    const prompt = `${behavior}\n\n${message}`;
+    const apiKey = "AIzaSyBAASAHLTDCitwQkApFZeYz5HcJhMqZIaY";
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyBAASAHLTDCitwQkApFZeYz5HcJhMqZIaY`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        contents: [{
+    const requestBody = {
+      contents: [
+        {
           role: "user",
-          parts: [{ text: prompt }]
-        }]
-      })
+          parts: [
+            { text: behavior || "You are a helpful assistant." },
+            { text: message || "Hello!" }
+          ]
+        }
+      ]
+    };
+
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody)
     });
 
     const data = await response.json();
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ Gemini API responded with no content.";
+
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ Gemini gave no meaningful reply.";
     res.json({ reply });
-  } catch (error) {
-    console.error("Gemini API error:", error);
-    res.status(500).json({ reply: "❌ Gemini API error." });
+
+  } catch (err) {
+    console.error("Gemini error:", err);
+    res.status(500).json({ reply: "❌ Server error with Gemini API." });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`✅ Server live on port ${PORT}`);
 });
