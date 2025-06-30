@@ -1,60 +1,52 @@
 const express = require("express");
-const cors = require("cors");
 const fetch = require("node-fetch");
+const cors = require("cors");
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+
 app.use(cors());
 app.use(express.json());
-
-const GEMINI_API_KEY = "AIzaSyBAASAHLTDCitwQkApFZeYz5HcJhMqZIaY";
 
 app.post("/askgpt", async (req, res) => {
   const { message, behavior } = req.body;
 
-  const prompt = `${behavior || "You are a helpful assistant."}\n\n${message || "Hello!"}`;
+  const GEMINI_API_KEY = "AIzaSyBAASAHLTDCitwQkApFZeYz5HcJhMqZIaY";
+  const prompt = `${behavior}\n\n${message}`;
 
   try {
-    const apiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              role: "user",
-              parts: [{ text: prompt }],
-            },
-          ],
-        }),
-      }
-    );
+    const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: prompt }]
+          }
+        ]
+      })
+    });
 
-    const text = await apiRes.text(); // first read raw response
+    const data = await apiResponse.json();
 
-    let data;
-    try {
-      data = JSON.parse(text);
-    } catch (e) {
-      console.error("❌ Failed to parse Gemini response:", text);
-      return res.status(500).json({ reply: "❌ Gemini gave an unreadable response." });
+    console.log("🧠 Gemini API Response:", JSON.stringify(data, null, 2)); // log the full response
+
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (reply) {
+      res.json({ reply });
+    } else {
+      res.json({ reply: "⚠️ Gemini gave no meaningful reply." });
     }
-
-    const reply =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      data.promptFeedback?.blockReason ||
-      "⚠️ Gemini returned no meaningful reply.";
-
-    res.status(200).json({ reply });
   } catch (error) {
-    console.error("❌ Gemini API error:", error.message);
-    res.status(500).json({ reply: "❌ Gemini API error. Try again later." });
+    console.error("❌ Gemini API error:", error);
+    res.status(500).json({ reply: "❌ Gemini API error. Please try again." });
   }
 });
 
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
