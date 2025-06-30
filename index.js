@@ -3,46 +3,50 @@ const cors = require("cors");
 const fetch = require("node-fetch");
 
 const app = express();
-const PORT = process.env.PORT || 10000;
-
 app.use(cors());
 app.use(express.json());
 
+const GEMINI_API_KEY = "AIzaSyBAASAHLTDCitwQkApFZeYz5HcJhMqZIaY";
+
 app.post("/askgpt", async (req, res) => {
+  const { message, behavior } = req.body;
+
+  const prompt = `${behavior || "You are a helpful assistant."}\n\n${message || "Hello!"}`;
+
   try {
-    const { message, behavior } = req.body;
-    const apiKey = "AIzaSyBAASAHLTDCitwQkApFZeYz5HcJhMqZIaY";
-
-    const requestBody = {
-      contents: [
-        {
-          role: "user",
-          parts: [
-  {
-    text: `${behavior || "You are a helpful assistant."}\n\n${message || "Hello!"}`
-  }
-]
-        }
-      ]
-    };
-
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody)
-    });
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta1/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              role: "user",
+              parts: [{ text: prompt }],
+            },
+          ],
+        }),
+      }
+    );
 
     const data = await response.json();
 
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ Gemini gave no meaningful reply.";
-    res.json({ reply });
+    const reply =
+      data.candidates?.[0]?.content?.parts?.[0]?.text ||
+      data.promptFeedback?.blockReason ||
+      "⚠️ Gemini returned no meaningful reply.";
 
-  } catch (err) {
-    console.error("Gemini error:", err);
-    res.status(500).json({ reply: "❌ Server error with Gemini API." });
+    res.status(200).json({ reply });
+  } catch (error) {
+    console.error("Gemini API error:", error);
+    res.status(500).json({ reply: "❌ Gemini API error. Try again later." });
   }
 });
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`✅ Server live on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
