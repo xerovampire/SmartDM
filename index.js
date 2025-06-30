@@ -15,7 +15,7 @@ app.post("/askgpt", async (req, res) => {
   const GEMINI_API_KEY = "AIzaSyBAASAHLTDCitwQkApFZeYz5HcJhMqZIaY";
 
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -23,7 +23,6 @@ app.post("/askgpt", async (req, res) => {
       body: JSON.stringify({
         contents: [
           {
-            role: "user",
             parts: [{ text: prompt }]
           }
         ]
@@ -31,12 +30,11 @@ app.post("/askgpt", async (req, res) => {
     });
 
     const data = await response.json();
-
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "❌ Gemini API error.";
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "❌ No valid response from Gemini.";
 
     res.json({ reply });
   } catch (error) {
-    console.error("Gemini API Error:", error);
+    console.error("❌ Gemini API error:", error);
     res.status(500).json({ reply: "❌ Gemini API error." });
   }
 });
