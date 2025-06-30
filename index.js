@@ -14,8 +14,8 @@ app.post("/askgpt", async (req, res) => {
   const prompt = `${behavior || "You are a helpful assistant."}\n\n${message || "Hello!"}`;
 
   try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta1/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
+    const apiRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: {
@@ -32,7 +32,15 @@ app.post("/askgpt", async (req, res) => {
       }
     );
 
-    const data = await response.json();
+    const text = await apiRes.text(); // first read raw response
+
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      console.error("❌ Failed to parse Gemini response:", text);
+      return res.status(500).json({ reply: "❌ Gemini gave an unreadable response." });
+    }
 
     const reply =
       data.candidates?.[0]?.content?.parts?.[0]?.text ||
@@ -41,7 +49,7 @@ app.post("/askgpt", async (req, res) => {
 
     res.status(200).json({ reply });
   } catch (error) {
-    console.error("Gemini API error:", error);
+    console.error("❌ Gemini API error:", error.message);
     res.status(500).json({ reply: "❌ Gemini API error. Try again later." });
   }
 });
