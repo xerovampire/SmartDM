@@ -8,35 +8,35 @@ const PORT = process.env.PORT || 10000;
 app.use(cors());
 app.use(express.json());
 
-const GEMINI_API_KEY = "AIzaSyBAASAHLTDCitwQkApFZeYz5HcJhMqZIaY";
-
 app.post("/askgpt", async (req, res) => {
   const { message, behavior } = req.body;
+
   const prompt = `${behavior}\n\n${message}`;
+  const GEMINI_API_KEY = "AIzaSyBAASAHLTDCitwQkApFZeYz5HcJhMqZIaY";
 
   try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta1/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [
-            {
-              role: "user",
-              parts: [{ text: prompt }]
-            }
-          ]
-        })
-      }
-    );
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: prompt }]
+          }
+        ]
+      })
+    });
 
     const data = await response.json();
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "❌ No response received.";
-    res.json({ reply });
 
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "❌ Gemini API error.";
+
+    res.json({ reply });
   } catch (error) {
-    console.error("Gemini error:", error);
+    console.error("Gemini API Error:", error);
     res.status(500).json({ reply: "❌ Gemini API error." });
   }
 });
