@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>SmartDM – Instagram DM Automation Tool</title>
+  <meta name="description" content="Automate your Instagram DMs with SmartDM. Drive engagement, conversions, and customer support on autopilot." />
+  <meta name="keywords" content="Instagram automation, DM bot, SmartDM, DM marketing, social media tools, auto-reply, Instagram chatbot" />
+  <meta name="author" content="SmartDM Team" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SmartDM – Automate Your Instagram DMs" />
+  <meta property="og:description" content="Grow your brand with automated Instagram messages. Set keywords, auto-replies, and track analytics." />
+  <meta property="og:image" content="https://i.postimg.cc/dtnPxc7N/IMG-20250701-102651.png" />
+  <meta property="og:url" content="https://smartdm.netlify.app" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SmartDM – Automate Your Instagram DMs" />
+  <meta name="twitter:description" content="Grow your brand with automated Instagram messages. Set keywords, auto-replies, and track analytics." />
+  <meta name="twitter:image" content="https://i.postimg.cc/dtnPxc7N/IMG-20250701-102651.png" />
+
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/YSjtThRj/IMG-20250630-103102-removebg-preview.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+
+    header img {
+      height: 60px;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #ccc;
+    }
+
+    .hero-text a {
+      background: #ff2c94;
+      color: white;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+
+    .hero-text a:hover {
+      background: #e91e82;
+    }
+
+    .hero-img {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      animation: float 3s ease-in-out infinite;
+      min-width: 280px;
+    }
+
+    .hero-img img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .features-section {
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    .features-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      justify-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature-box {
+      background-color: #111;
+      padding: 1.5rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-height: 120px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .feature-box img {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .feature-content h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-content p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<style>
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 1rem;
+    transform: translateX(-100%);
+    transition: 0.3s ease-in-out;
+    z-index: 999;
+  }
+  .sidebar.show {
+    transform: translateX(0);
+  }
+  .sidebar .logo {
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+  .sidebar nav a {
+    display: block;
+    color: white;
+    margin: 1rem 0;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .sidebar .book-now {
+    margin-top: 2rem;
+    display: inline-block;
+    background: #ff2c94;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+  }
+
+  .toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  
+</style>
+
+<div class="sidebar" id="sidebar">
+  <img src="https://i.postimg.cc/YSjtThRj/IMG-20250630-103102-removebg-preview.png" alt="SmartDM Logo" class="logo">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="price.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="help-and-faqs.html">Help</a>
+    <a href="form.html" class="book-now">Book Now</a>
+  </nav>
+</div>
+
+<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+
+<script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('show');
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.querySelector('.sidebar');
+    const toggleBtn = document.querySelector('.toggle-btn');
+
+    function closeSidebar(e) {
+      if (
+        sidebar.classList.contains('show') &&
+        !sidebar.contains(e.target) &&
+        e.target !== toggleBtn
+      ) {
+        sidebar.classList.remove('show');
+        toggleBtn.style.display = 'block';
+      }
+    }
+
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        sidebar.classList.add('show');
+        toggleBtn.style.display = 'none';
+        setTimeout(() => {
+          document.addEventListener('click', closeSidebar);
+        }, 100);
+      });
+    }
+  });
+</script>
+
+<div class="container">
+  <header>
+    <img src="https://i.postimg.cc/YSjtThRj/IMG-20250630-103102-removebg-preview.png" alt="SmartDM Logo" />
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Automate Your Instagram DMs</h1>
+      <p>Drive engagement and conversions on autopilot.</p>
+      <a href="price.html">View Pricing</a>
+    </div>
+    <div class="hero-img">
+      <img src="https://i.postimg.cc/dtnPxc7N/IMG-20250701-102651.png" alt="Phone Illustration" />
+    </div>
+  </section>
+
+  <section class="features-section">
+    <h2>Features</h2>
+    <div class="features-grid">
+      <div class="feature-box">
+        <img src="https://i.postimg.cc/63Cf1wQ8/IMG-20250701-104511.png" alt="Keyword Trigger" />
+        <div class="feature-content">
+          <h3>Keyword Triggers</h3>
+          <p>Automatically respond based on user inputs.</p>
+        </div>
+      </div>
+      <div class="feature-box">
+        <img src="https://i.postimg.cc/W4B7ntsR/IMG-20250701-104525.png" alt="Workflow Automation" />
+        <div class="feature-content">
+          <h3>Workflow Automation</h3>
+          <p>Build smart workflows to guide conversations.</p>
+        </div>
+      </div>
+      <div class="feature-box">
+        <img src="https://i.postimg.cc/QM9b1cGk/IMG-20250701-104549.png" alt="Instagram Ads" />
+        <div class="feature-content">
+          <h3>Link to Instagram Ads</h3>
+          <p>Seamlessly connect DMs with your ad campaigns.</p>
+        </div>
+      </div>
+      <div class="feature-box">
+        <img src="https://i.postimg.cc/4NPBgJQt/IMG-20250701-104609.png" alt="Analytics Insights" />
+        <div class="feature-content">
+          <h3>Analytics & Insights</h3>
+          <p>Track performance with detailed metrics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</body>
+</html>

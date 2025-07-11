@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About – Smart DM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: url('https://i.postimg.cc/zvBfx4Ws/file-00000000710061f7832189a4fb43f2dd.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      background: linear-gradient(90deg, #ff2c94, #c800ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 4rem auto;
+      color: #ddd;
+      font-size: 1.1rem;
+      animation: fadeInUp 1.2s ease-in-out;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: 0.3s;
+      animation: floatIn 1.4s ease forwards;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 20px rgba(255, 64, 129, 0.3);
+    }
+
+    .feature-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+      background: linear-gradient(90deg, #ff2c94, #c800ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .feature-card p {
+      color: #ccc;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      color: white;
+      padding: 1rem;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 999;
+    }
+    .sidebar.show {
+      transform: translateX(0);
+    }
+    .sidebar .logo {
+      max-width: 100%;
+      margin-bottom: 2rem;
+    }
+    .sidebar nav a {
+      display: block;
+      color: white;
+      margin: 1rem 0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .sidebar .book-now {
+      margin-top: 2rem;
+      display: inline-block;
+      background: #ff2c94;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      z-index: 1000;
+      display: block;
+    }
+
+    @media (min-width: 1024px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <img src="https://i.postimg.cc/YSjtThRj/IMG-20250630-103102-removebg-preview.png" alt="SmartDM Logo" class="logo">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="price.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="help-and-faqs.html">Help</a>
+    <a href="form.html" class="book-now">Book Now</a>
+  </nav>
+</div>
+<div class="toggle-btn" id="toggleBtn">☰</div>
+
+<!-- Main Content -->
+<div class="container">
+  <header>
+    <h1>About Smart DM</h1>
+  </header>
+  <div class="intro">
+    <p>Smart DM is built with one goal — to help businesses automate Instagram communication, boost engagement, and streamline lead generation. Whether you’re a creator, agency, or local business, Smart DM brings the power of automation and AI to your inbox.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3>Made for Instagram</h3>
+      <p>Designed specifically for Instagram DM automation. No bloated features, just results.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Fully Customizable</h3>
+      <p>Every workflow, reply, and trigger can be customized to your business tone and strategy.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Built with AI</h3>
+      <p>Smart GPT-driven replies that make your account feel human while you're sleeping.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Affordable Plans</h3>
+      <p>We keep it transparent — monthly, 3-month, and yearly options tailored for every scale.</p>
+    </div>
+  </div>
+
+  <footer>© 2025 Smart DM. Built by Akshat.</footer>
+</div>
+
+<!-- Sidebar Toggle Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+
+    function closeSidebar(e) {
+      if (
+        sidebar.classList.contains('show') &&
+        !sidebar.contains(e.target) &&
+        e.target !== toggleBtn
+      ) {
+        sidebar.classList.remove('show');
+        toggleBtn.style.display = 'block';
+        document.removeEventListener('click', closeSidebar);
+      }
+    }
+
+    toggleBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      sidebar.classList.add('show');
+      toggleBtn.style.display = 'none';
+      setTimeout(() => {
+        document.addEventListener('click', closeSidebar);
+      }, 100);
+    });
+  });
+</script>
+
+</body>
+</html>

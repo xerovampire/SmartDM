@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart DM Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background: url('https://i.postimg.cc/63XNrJKs/pawel-czerwinski-o-IT3-X1o-Pt-FA-unsplash.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      border-radius: 12px;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 30px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #ff4081;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .success-message {
+      margin-top: 20px;
+      background: rgba(0, 255, 120, 0.1);
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 500;
+      display: none;
+      color: #00ff99;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      color: white;
+      padding: 1rem;
+      transform: translateX(-100%);
+      transition: 0.3s ease-in-out;
+      z-index: 999;
+    }
+    .sidebar.show {
+      transform: translateX(0);
+    }
+    .sidebar .logo {
+      max-width: 100%;
+      margin-bottom: 2rem;
+    }
+    .sidebar nav a {
+      display: block;
+      color: white;
+      margin: 1rem 0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .sidebar .book-now {
+      margin-top: 2rem;
+      display: inline-block;
+      background: #ff2c94;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+    }
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <img src="https://i.postimg.cc/YSjtThRj/IMG-20250630-103102-removebg-preview.png" alt="SmartDM Logo" class="logo">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="price.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="help-and-faqs.html">Help</a>
+    <a href="form.html" class="book-now">Book Now</a>
+  </nav>
+</div>
+<div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+
+<!-- Form Content -->
+<h1>Submit Your Details</h1>
+<form id="smartdm-form" action="https://formspree.io/f/xdkzbnwl" method="POST">
+  <label for="name">Name</label>
+  <input required type="text" id="name" name="Name" placeholder="Enter your name" />
+
+  <label for="whatsapp">WhatsApp Number</label>
+  <input required type="text" id="whatsapp" name="WhatsApp" placeholder="e.g. 82871XXXXX" />
+
+  <label for="instagram">Instagram Username</label>
+  <input type="text" id="instagram" name="Instagram" placeholder="@yourhandle" />
+
+  <label for="business">Business Name</label>
+  <input type="text" id="business" name="Business" placeholder="(Optional)" />
+
+  <label for="plan">Plan Chosen</label>
+  <select name="Plan" id="plan" required>
+    <option value="" disabled selected>Select plan</option>
+    <option value="Monthly">Monthly – ₹199</option>
+    <option value="3-Month">3-Month – ₹500</option>
+    <option value="Lifetime">Lifetime – ₹999</option>
+  </select>
+
+  <label for="notes">Additional Notes</label>
+  <textarea id="notes" name="Notes" rows="3" placeholder="Anything else? (optional)"></textarea>
+
+  <button type="submit">Submit</button>
+  <div class="success-message" id="successMsg">✅ Thank you! We’ll contact you on WhatsApp shortly.</div>
+</form>
+
+<!-- Scripts -->
+<script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('show');
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.querySelector('.sidebar');
+    const toggleBtn = document.querySelector('.toggle-btn');
+
+    function closeSidebar(e) {
+      if (
+        sidebar.classList.contains('show') &&
+        !sidebar.contains(e.target) &&
+        e.target !== toggleBtn
+      ) {
+        sidebar.classList.remove('show');
+        toggleBtn.style.display = 'block';
+      }
+    }
+
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        sidebar.classList.add('show');
+        toggleBtn.style.display = 'none';
+        setTimeout(() => {
+          document.addEventListener('click', closeSidebar);
+        }, 100);
+      });
+    }
+  });
+
+  const form = document.getElementById('smartdm-form');
+  const successMsg = document.getElementById('successMsg');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      successMsg.style.display = 'block';
+      form.reset();
+    } else {
+      successMsg.innerText = '❌ Something went wrong. Try again.';
+      successMsg.style.display = 'block';
+      successMsg.style.color = 'red';
+    }
+  });
+</script>
+
+</body>
+</html>

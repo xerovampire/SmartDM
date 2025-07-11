@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart DM – Pricing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: url('https://i.postimg.cc/zvBfx4Ws/file-00000000710061f7832189a4fb43f2dd.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 40px;
+      text-align: center;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    .pricing-container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeInUp 1.2s ease-out;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid #ff2c94;
+      border-radius: 20px;
+      padding: 25px 20px;
+      width: 260px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #ff2c94;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .duration {
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 20px;
+      padding-left: 0;
+      text-align: left;
+    }
+
+    ul li {
+      margin: 8px 0;
+      font-size: 0.95rem;
+      position: relative;
+      padding-left: 18px;
+    }
+
+    ul li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #ff2c94;
+      font-weight: bold;
+    }
+
+    .btn {
+      background: #ff2c94;
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #ccc;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+      }
+
+      .pricing-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Sidebar from index.html (exact code) */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      color: white;
+      padding: 1rem;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 999;
+    }
+
+    .sidebar.show {
+      transform: translateX(0);
+    }
+
+    .sidebar .logo {
+      max-width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      margin: 1rem 0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .sidebar .book-now {
+      margin-top: 2rem;
+      display: inline-block;
+      background: #ff2c94;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* Removed media query that forced static sidebar */
+  </style>
+</head>
+<body>
+
+<!-- Sidebar copied exactly -->
+<div class="sidebar" id="sidebar">
+  <img src="https://i.postimg.cc/YSjtThRj/IMG-20250630-103102-removebg-preview.png" alt="SmartDM Logo" class="logo">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="price.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="help-and-faqs.html">Help</a>
+    <a href="form.html" class="book-now">Book Now</a>
+  </nav>
+</div>
+<div class="toggle-btn" id="toggleBtn">☰</div>
+
+<!-- Toggle Script copied from index.html -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+
+    function closeSidebar(e) {
+      if (
+        sidebar.classList.contains('show') &&
+        !sidebar.contains(e.target) &&
+        e.target !== toggleBtn
+      ) {
+        sidebar.classList.remove('show');
+        toggleBtn.style.display = 'block';
+        document.removeEventListener('click', closeSidebar);
+      }
+    }
+
+    toggleBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      sidebar.classList.add('show');
+      toggleBtn.style.display = 'none';
+      setTimeout(() => {
+        document.addEventListener('click', closeSidebar);
+      }, 100);
+    });
+  });
+</script>
+
+<!-- Page Content -->
+<h1>Dynamic Pricing</h1>
+<div class="pricing-container">
+  <div class="card">
+    <h2>Basic</h2>
+    <div class="price">₹199</div>
+    <div class="duration">per month</div>
+    <ul>
+      <li>Instagram DM Automation</li>
+      <li>Keyword Triggers</li>
+      <li>Instagram Ads Linking</li>
+      <li>Basic Support</li>
+      <li>GPT Support (Limited)</li>
+    </ul>
+    <a href="https://wa.me/918447185885" target="_blank" class="btn">Buy</a>
+  </div>
+
+  <div class="card">
+    <h2>Standard</h2>
+    <div class="price">₹499</div>
+    <div class="duration">per 3 months</div>
+    <ul>
+      <li>Everything in Basic</li>
+      <li>Funnel Workflows</li>
+      <li>Advanced Triggers</li>
+      <li>Priority Support</li>
+      <li>GPT Support (Full)</li>
+    </ul>
+    <a href="https://wa.me/918447185885" target="_blank" class="btn">Buy</a>
+  </div>
+
+  <div class="card">
+    <h2>Premium</h2>
+    <div class="price">₹999</div>
+    <div class="duration">per year</div>
+    <ul>
+      <li>All Pro Features</li>
+      <li>Ad Retargeting Integration</li>
+      <li>Analytics & Tracking</li>
+      <li>Premium Support</li>
+      <li>GPT Assistance + Updates</li>
+    </ul>
+    <a href="https://wa.me/918447185885" target="_blank" class="btn">Buy</a>
+  </div>
+</div>
+
+<footer>
+  © 2025 Smart DM. All rights reserved.
+</footer>
+
+</body>
+</html>

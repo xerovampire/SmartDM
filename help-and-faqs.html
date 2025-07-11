@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Help & FAQs – Smart DM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: url('https://i.postimg.cc/zvBfx4Ws/file-00000000710061f7832189a4fb43f2dd.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      background: linear-gradient(90deg, #ff2c94, #c800ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInDown 1s ease-in-out;
+    }
+    .faq-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      animation: fadeInUp 1.2s ease-in-out;
+    }
+    .faq {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 10px rgba(255, 44, 148, 0.2);
+      transition: 0.3s;
+    }
+    .faq:hover {
+      box-shadow: 0 0 18px rgba(255, 44, 148, 0.4);
+    }
+    .faq h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(90deg, #ff2c94, #c800ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .faq p {
+      color: #ddd;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      color: white;
+      padding: 1rem;
+      transform: translateX(-100%);
+      transition: 0.3s ease-in-out;
+      z-index: 999;
+    }
+    .sidebar.show {
+      transform: translateX(0);
+    }
+    .sidebar .logo {
+      max-width: 100%;
+      margin-bottom: 2rem;
+    }
+    .sidebar nav a {
+      display: block;
+      color: white;
+      margin: 1rem 0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .sidebar .book-now {
+      margin-top: 2rem;
+      display: inline-block;
+      background: #ff2c94;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+    }
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    @media (max-width: 768px) {
+      .faq {
+        padding: 1.2rem;
+      }
+      .faq h2 {
+        font-size: 1.2rem;
+      }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <img src="https://i.postimg.cc/YSjtThRj/IMG-20250630-103102-removebg-preview.png" alt="SmartDM Logo" class="logo">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="price.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="help-and-faqs.html">Help</a>
+    <a href="form.html" class="book-now">Book Now</a>
+  </nav>
+</div>
+<div class="toggle-btn" id="toggleBtn">☰</div>
+
+<!-- Page Content -->
+<div class="container">
+  <header>
+    <h1>Help & FAQs</h1>
+  </header>
+
+  <section class="faq-section">
+
+    <div class="faq">
+      <h2>How do I start using Smart DM?</h2>
+      <p>Just choose your plan from our pricing page and complete the WhatsApp payment. We’ll set up your automation within 24 hours!</p>
+    </div>
+
+    <div class="faq">
+      <h2>Can I edit my DM replies later?</h2>
+      <p>Yes! You can contact our support via WhatsApp and request edits or updates at any time depending on your plan.</p>
+    </div>
+
+    <div class="faq">
+      <h2>Do I need a business account?</h2>
+      <p>Yes, Smart DM works best with Instagram Business accounts. It ensures proper access to automation features.</p>
+    </div>
+
+    <div class="faq">
+      <h2>Does Smart DM support Instagram Ads integration?</h2>
+      <p>Absolutely. Our system links directly with your Ads to trigger automated replies and workflows when a user messages your profile.</p>
+    </div>
+
+    <div class="faq">
+      <h2>What if I face issues or need support?</h2>
+      <p>You can reach out on WhatsApp anytime at <b>+91 8447185885</b> or email us at <b>getinfo.smartdm@gmail.com</b>.</p>
+    </div>
+
+    <div class="faq">
+      <h2>Do I need to install anything?</h2>
+      <p>No installations needed. Everything is cloud-based and handled from our side. We’ll only ask for minimal access to connect your account.</p>
+    </div>
+
+  </section>
+
+  <footer>© 2025 Smart DM. All rights reserved.</footer>
+</div>
+
+<!-- Scripts -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+
+    function closeSidebar(e) {
+      if (sidebar.classList.contains('show') &&
+          !sidebar.contains(e.target) &&
+          e.target !== toggleBtn) {
+        sidebar.classList.remove('show');
+        toggleBtn.style.display = 'block';
+        document.removeEventListener('click', closeSidebar);
+      }
+    }
+
+    toggleBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      sidebar.classList.add('show');
+      toggleBtn.style.display = 'none';
+      setTimeout(() => {
+        document.addEventListener('click', closeSidebar);
+      }, 100);
+    });
+  });
+</script>
+
+</body>
+</html>

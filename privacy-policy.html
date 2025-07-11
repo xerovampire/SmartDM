@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy – Smart DM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: url('https://i.postimg.cc/zvBfx4Ws/file-00000000710061f7832189a4fb43f2dd.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      background: linear-gradient(90deg, #ff2c94, #c800ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    .policy-content {
+      max-width: 900px;
+      margin: 2rem auto;
+      color: #ddd;
+      font-size: 1rem;
+      line-height: 1.8;
+      animation: fadeInUp 1.2s ease-in-out;
+    }
+
+    .policy-content h2 {
+      font-size: 1.6rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #ff2c94, #c800ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      color: white;
+      padding: 1rem;
+      transform: translateX(-100%);
+      transition: 0.3s ease-in-out;
+      z-index: 999;
+    }
+
+    .sidebar.show {
+      transform: translateX(0);
+    }
+
+    .sidebar .logo {
+      max-width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: white;
+      margin: 1rem 0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .sidebar .book-now {
+      margin-top: 2rem;
+      display: inline-block;
+      background: #ff2c94;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* Removed the static sidebar on desktop */
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <img src="https://i.postimg.cc/YSjtThRj/IMG-20250630-103102-removebg-preview.png" alt="SmartDM Logo" class="logo">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="price.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="help-and-faqs.html">Help</a>
+    <a href="form.html" class="book-now">Book Now</a>
+  </nav>
+</div>
+<div class="toggle-btn" id="toggleBtn">☰</div>
+
+<!-- Toggle Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleBtn');
+
+    function closeSidebar(e) {
+      if (sidebar.classList.contains('show') &&
+          !sidebar.contains(e.target) &&
+          e.target !== toggleBtn) {
+        sidebar.classList.remove('show');
+        toggleBtn.style.display = 'block';
+        document.removeEventListener('click', closeSidebar);
+      }
+    }
+
+    toggleBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      sidebar.classList.add('show');
+      toggleBtn.style.display = 'none';
+      setTimeout(() => {
+        document.addEventListener('click', closeSidebar);
+      }, 100);
+    });
+  });
+</script>
+
+<!-- Main Content -->
+<div class="container">
+  <header>
+    <h1>Privacy Policy</h1>
+  </header>
+
+  <div class="policy-content">
+    <p>At Smart DM, we prioritize your privacy. This Privacy Policy outlines how your personal information is collected, used, and protected when you use our website and services.</p>
+
+    <h2>1. Information We Collect</h2>
+    <p>We may collect your name, email, Instagram username, business details, and other relevant data when you interact with our services or fill out a form.</p>
+
+    <h2>2. How We Use Your Information</h2>
+    <p>We use your information to:</p>
+    <ul>
+      <li>Provide automated DM services.</li>
+      <li>Improve customer support and service quality.</li>
+      <li>Send updates or service-related announcements.</li>
+    </ul>
+
+    <h2>3. Data Security</h2>
+    <p>Your data is stored securely and never shared or sold. We implement best practices to prevent unauthorized access.</p>
+
+    <h2>4. Third-Party Tools</h2>
+    <p>We may use tools like analytics or WhatsApp APIs which collect anonymous usage data to improve functionality.</p>
+
+    <h2>5. Cookies</h2>
+    <p>Smart DM may use cookies to enhance your experience. You can disable them in your browser settings if preferred.</p>
+
+    <h2>6. Changes to This Policy</h2>
+    <p>We may update this policy occasionally. Continued use of our service indicates acceptance of these changes.</p>
+
+    <h2>7. Contact Us</h2>
+    <p>For any questions regarding this privacy policy, contact us at <b>support@smartdm.netlify.app</b>.</p>
+  </div>
+
+  <footer>© 2025 Smart DM. Built by Akshat.</footer>
+</div>
+
+</body>
+</html>
